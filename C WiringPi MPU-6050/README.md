@@ -1,0 +1,1 @@
+Work with the MPU-6050 Accelerometer and Gyroscope from a WiringPi environment.

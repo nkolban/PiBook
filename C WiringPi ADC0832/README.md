@@ -1,0 +1,1 @@
+Work with the ADC0832 analog to digital converter from a WiringPi environment.
