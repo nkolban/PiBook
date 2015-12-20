@@ -5,7 +5,7 @@
 #define ECHO (27)
 
 int main(int argc, char *argv[]) {
-  printf("Starting blink test\n");
+  printf("Starting HC-SR04 test\n");
   int rc = wiringPiSetupGpio();
   if (rc != 0) {
     printf("Failed to wiringPiSetupGpio()\n");

@@ -1,0 +1,1 @@
+Connect to a local gpsd demon and print the GPS information.
