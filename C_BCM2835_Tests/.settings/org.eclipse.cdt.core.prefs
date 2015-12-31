@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+environment/project/0.173079524/USR_INCLUDE_ARM_LINUX_GNUEABIHF/delimiter=\:
+environment/project/0.173079524/USR_INCLUDE_ARM_LINUX_GNUEABIHF/operation=replace
+environment/project/0.173079524/USR_INCLUDE_ARM_LINUX_GNUEABIHF/value=/mnt/pi/root/usr/include/arm-linux-gnueabihf
+environment/project/0.173079524/append=true
+environment/project/0.173079524/appendContributed=true
