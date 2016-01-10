@@ -1,16 +1,10 @@
-APP=mpu6050_1
+APP=mpu6050
 OBJS=mpu6050.o
 
-#----
-PI_ROOT=/mnt/pi/root
-PRE=arm-linux-gnueabihf-
-CC=$(PRE)gcc
+CC=gcc
 
-# The directory into which the final application will be copied
-# during a 'make install'.
-OUTPUT_DIR=/mnt/pi/home/src/builds
-INCLUDES=-I$(PI_ROOT)/usr/local/include
-LIBDIRSS=-L$(PI_ROOT)/usr/local/lib
+INCLUDES=-I/usr/local/include
+LIBDIRSS=-L/usr/local/lib
 LIBS=-lwiringPi
 
 all: $(APP)
@@ -23,6 +17,3 @@ $(APP): $(OBJS)
 	
 clean:
 	rm -f $(APP) $(OBJS)
-
-install: all
-	cp $(APP) $(OUTPUT_DIR)
