@@ -1,5 +1,7 @@
 #include <wiringPi.h>
 #include <wiringPiSPI.h>
+#include <math.h>
+#include <stdio.h>
 #include "LedControl.h"
 
 //the opcodes for the MAX7221 and MAX7219
@@ -18,7 +20,13 @@
 #define OP_SHUTDOWN    12
 #define OP_DISPLAYTEST 15
 
-LedControl::LedControl(int numDevices) {
+static int CS_PIN;
+
+LedControl::LedControl(int csPin, int numDevices) {
+  wiringPiSetupGpio();
+  CS_PIN = csPin;
+  pinMode(CS_PIN, OUTPUT);
+  digitalWrite(CS_PIN, HIGH);
     if(numDevices<=0 || numDevices>8 )
         numDevices=8;
     maxDevices=numDevices;
@@ -122,6 +130,7 @@ void LedControl::setColumn(int addr, int col, uint8_t value) {
 }
 
 void LedControl::setDigit(int addr, int digit, uint8_t value, bool dp) {
+  printf("Set digit: digit=%d, value=%d\n", digit, value);
     int offset;
     uint8_t v;
 
@@ -172,10 +181,35 @@ void LedControl::spiTransfer(int addr, volatile uint8_t opcode, volatile uint8_t
     //enable the line
 
 
+    digitalWrite(CS_PIN, LOW);
     //Now shift out the data
     for(int i=maxbytes;i>0;i--) {
       wiringPiSPIDataRW(0, &spidata[i-1], 1);
     }
     //latch the data onto the display
+    digitalWrite(CS_PIN, HIGH);
 
+}
+
+void LedControl::setNumber(int addr, double num, int numDecimals) {
+  int digit=0;
+  double wholeDouble;
+  int needPoint = 0;
+  int fraction = modf(num, &wholeDouble) * pow(10, numDecimals);
+  int whole = wholeDouble;
+  if (numDecimals > 0) {
+    int i;
+    for (i=0; i<numDecimals; i++) {
+      setDigit(addr, digit, fraction%10, 0);
+      digit++;
+      fraction = fraction / 10;
+    }
+    needPoint = 1;
+  }
+  while(whole > 0 || digit == 0) {
+    setDigit(addr, digit, whole%10, needPoint);
+    needPoint = 0;
+    digit++;
+    whole = whole / 10;
+  }
 }

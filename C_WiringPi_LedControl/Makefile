@@ -1,10 +1,18 @@
-APP=test1
-OBJS=LedControl.o DemoMatrix.o
+APP1=DemoMatrix
+APP2=LCDemo7Segment
+APP1_OBJS=LedControl.o DemoMatrix.o
+APP2_OBJS=LedControl.o LCDemo7Segment.o
 
-all: $(APP)
+all: $(APP1) $(APP2)
 
-$(APP): $(OBJS)
-	$(CXX) -o $(APP) $(OBJS) -L/usr/local/lib -lwiringPi
+$(APP1): $(APP1_OBJS)
+	$(CXX) -o $(APP1) $(APP1_OBJS) -L/usr/local/lib -lwiringPi
+
+$(APP2): $(APP2_OBJS)
+	$(CXX) -o $(APP2) $(APP2_OBJS) -L/usr/local/lib -lwiringPi
 
 .cpp.c:
 	$(CXX) -c $< -o $@
+
+clean:
+	rm -f *.o $(APP1) $(APP2)

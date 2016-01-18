@@ -60,7 +60,7 @@ class LedControl {
          * csPin    pin for selecting the device
          * numDevices maximum number of devices that can be controled
          */
-        LedControl(int numDevices=1);
+        LedControl(int csPin, int numDevices=1);
 
         /*
          * Gets the number of devices attached to this LedControl.
@@ -157,6 +157,15 @@ class LedControl {
          * dp sets the decimal point.
          */
         void setChar(int addr, int digit, char value, bool dp);
+
+        /*
+         * Display a decimal number on a set of 7-Segment displays.
+         * Params:
+         * addr address of the display
+         * num the number to display
+         * numDecimals the number of digits after the decimal point to display
+         */
+        void setNumber(int addr, double num, int numDecimals);
 };
 
 #endif /* LEDCONTROL_H_ */
