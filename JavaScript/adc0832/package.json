@@ -1,0 +1,22 @@
+{
+  "name": "adc0832",
+  "version": "1.0.0",
+  "description": "An interface to the ADC0832 analog to digitcal converter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "adc0832",
+    "pi",
+    "raspberry",
+    "adc"
+  ],
+  "author": "Neil Kolban <kolban1@kolban.com>",
+  "license": "ISC",
+  "dependencies": {
+    "wiring-pi" : ">=2.1.1"
+  },
+  "os" : ["linux"],
+  "cpu" : ["arm"]
+}
